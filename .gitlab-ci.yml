@@ -1,0 +1,214 @@
+include:
+  - template: Code-Quality.gitlab-ci.yml
+  - template: Security/Container-Scanning.gitlab-ci.yml
+  - template: Security/License-Management.gitlab-ci.yml
+  # - template: Security/DAST.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
+  - template: Security/Dependency-Scanning.gitlab-ci.yml
+stages:
+  - test
+  - build
+  - test_img
+  - predeploy
+  - deploy
+  - test_deploy
+#### this is for template
+dependency_scanning:
+  stage: test
+  only:
+    - development
+  tags:
+    - docker
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - gl-dependency-scanning-report.json
+  except:
+    - development
+    - release
+    - master
+sast:
+  stage: test
+  tags:
+    - docker
+  only:
+    - development
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - gl-sast-report.json
+  except:
+    - development
+    - release
+    - master
+
+license_management:
+  stage: test
+  tags:
+    - docker
+  only:
+    - development
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - gl-license-management-report.json
+  except:
+    - development
+    - release
+    - master
+
+code_quality:
+  stage: test
+  tags:
+    - docker
+  only:
+    - development
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - gl-code-quality-report.json
+  except:
+    - development
+    - release
+    - master
+
+container_scanning:
+  stage: test_img
+  tags:
+    - docker
+  only:
+    - development
+    - master
+    - release
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - gl-container-scanning-report.json
+
+#### this is where you start to EDIT
+
+
+
+build_dev:
+  image: docker:latest
+  tags:
+    - docker
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p "$CI_JOB_TOKEN" $CI_REGISTRY
+  stage: build
+  script:
+    - cp $DEV_DOCKERFILE Dockerfile
+    - docker build -f Dockerfile --pull -t $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA -t $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:latest .
+    - docker push $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:latest
+  after_script:
+    - docker logout $CI_REGISTRY
+  only:
+    - development
+    - release
+build:
+  image: docker:latest
+  tags:
+    - docker
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p "$CI_JOB_TOKEN" $CI_REGISTRY
+  stage: build
+  script:
+    - cp $DOCKERFILE Dockerfile
+    - docker build -f Dockerfile --pull -t $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA -t $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:latest .
+    - docker push $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:latest
+  after_script:
+    - docker logout $CI_REGISTRY
+  only:
+    - master
+### DEV DEPLOYMENT
+predeploy:
+  stage: predeploy
+  tags:
+    - gcalls_dev
+  script:
+    - docker stop $CI_PROJECT_NAME
+    - yes y | docker image prune
+  allow_failure: true
+  only:
+    - development
+deploy_dev:
+  stage: deploy
+  tags:
+    - gcalls_dev
+  environment:
+    name: development
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p "$CI_JOB_TOKEN" $CI_REGISTRY
+    - docker pull $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+    - cp $NGINX_DEFAULTS /home/gcalls/config/defaults.conf
+    - cp $NGINX_DEV /home/gcalls/config/$CI_PROJECT_NAME.conf
+    - cp $DHPARAM /home/gcalls/ssl/dhparam.pem
+    - cp $GCALLVN_CRT /home/gcalls/ssl/gcall.vn-all.crt
+    - cp $GCALLVN_KEY /home/gcalls/ssl/gcall.vn.key
+  script:
+    - cp $DEV_ENV /home/gcalls/env/$CI_PROJECT_NAME.env
+    - docker run --rm -d --name $CI_PROJECT_NAME -p $PORT:$PORT --network gcalls_dev -v /home/gcalls/env/$CI_PROJECT_NAME.env:/app/src/.env $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+  after_script:
+    - docker restart nginx
+    - docker logs $CI_PROJECT_NAME
+    - docker logout
+  only:
+      - development
+
+# ### PRODUCT DEPLOYMENT
+# deploy_prod:
+#   stage: deploy
+#   tags:
+#     - tools_prod
+#   environment:
+#     name: production
+#     url: https://cdrs.gcall.vn
+#   before_script:
+#     - docker login -u $CI_REGISTRY_USER -p "$CI_JOB_TOKEN" $CI_REGISTRY
+#   script:
+#     - docker pull $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+#     - docker-compose up --build -d
+#     - docker cp tool-cdrs:/usr/local/src/app/client/dist/. /home/devops/private/public/cdrs-ui
+#     - cp -R ./nginx/cdrs.gcall.vn.conf /home/devops/private/nginx/conf.d/
+#     - docker restart nginx
+#     - echo $CI_ENVIRONMENT_URL > environment_url.txt
+#   after_script:
+#     - docker logout
+#   artifacts:
+#     paths:
+#       - environment_url.txt
+#   when: manual
+#   only:
+#     - master
+
+# deploy_release:
+#   stage: deploy
+#   tags:
+#     - tools_prod
+#   environment:
+#     name: production
+#     url: https://cdrs.gcall.vn
+#   before_script:
+#     - docker login -u $CI_REGISTRY_USER -p "$CI_JOB_TOKEN" $CI_REGISTRY
+#   script:
+#     - docker pull $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+#     - docker-compose up --build -d
+#     - docker cp tool-cdrs:/usr/local/src/app/client/dist/. /home/devops/private/public/cdrs-ui
+#     - cp -R ./nginx/cdrs.gcall.vn.conf /home/devops/private/nginx/conf.d/
+#     - docker restart nginx
+#     - echo $CI_ENVIRONMENT_URL > environment_url.txt
+#   after_script:
+#     - docker logout
+#   artifacts:
+#     paths:
+#       - environment_url.txt
+#   when: manual
+#   only:
+#     - master
+

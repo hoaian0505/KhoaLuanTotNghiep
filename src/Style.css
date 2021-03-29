@@ -1,0 +1,646 @@
+
+.Tittle {
+    color: white;
+    padding: 25px;
+    font-family: Arial;
+    text-align: center;
+    font-size:3vw;
+    background:#31708E;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+body{
+    background: #F2F2F2;
+}
+
+.Center {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 50px;
+}
+
+.Right {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+    margin-top:-30px;
+}
+
+.IconShow{
+    font-size: 25px;
+    position: absolute;
+    right: 22%;
+    float: right;
+    border-radius: 25px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.data-user{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.dropdown-content {
+    margin-top: 2%;
+    right: 22%;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+i.IconShow:hover{
+  background-color: #e0dfdc;
+  cursor: pointer;
+}
+
+.Nhap{
+    font-size:28px;
+    border:none;
+    width: 700px;
+}
+
+.Nhap:focus{
+    border: 2px solid blue;
+}
+
+
+.ThayDoi{
+    font-size:20px;
+    border:none;
+}
+
+.ThayDoi:focus{
+    border: 2px solid blue;
+}
+
+
+button{
+    padding: 10px 30px;
+    border: none;
+    border-radius: 30px;
+    background-color: #31708E;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight:800;
+}
+button:hover {
+    background: #40a9ff;
+}
+
+#btnGet {
+    margin-left: 30px;
+    border-radius: 8px;
+}
+
+.SelectBox{
+    background: #fff;
+    color: #000;
+    cursor: pointer;
+    font-size:16px;
+    font-weight:600;
+    height:30px;
+    padding-left: 15px;
+    padding-right: 15px;
+    /*for firefox*/
+    -moz-appearance: none;
+    /*for chrome*/
+    -webkit-appearance:none;
+    appearance: none;
+    text-align:center;
+    border: none;
+    box-shadow: none;
+}
+.btn-close{
+    float: right;
+}
+#dropDownPage {
+    justify-content: right;
+    margin-right: -8px;
+}
+
+#dropDownLinhVuc{
+    width: 500%;
+}
+
+footer{
+    display: flex;
+    background:#687864;
+    color: #fff;
+    margin-bottom:-20px;
+    height: 60px;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    /* bottom: 20px; */
+}
+
+.icon{ 
+    margin-left:10px;
+    color:#31708E;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.icon:hover{
+    color: #40a9ff;
+}
+
+.iconLogOut{ 
+    position: absolute;
+    right: 25px;
+    top:3vw;
+    color:#fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.iconLogOut:hover{
+    color:#fff;
+}
+
+#LinhVucInput{
+    visibility: hidden;
+}
+
+.cung1hang{
+    margin-top:20px;
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.divSort{
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.NoContact{
+    color: #fff;
+}
+
+.Contact{
+    color:#000;
+    background-color: #31708E;
+}
+.CustomSelectRow{
+    font-weight: 800;
+}
+
+.col-hidden{
+    display: none;
+}
+
+.form-horizontal{
+    margin-top:30px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-main {
+    position:fixed;
+    background: white;
+    width: 40%;
+    height: auto;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+.modal-header{
+    border-bottom-width: 1px;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9fafe;
+}
+
+.modal-body{
+    max-height: 200px;
+}
+
+.modal-footer{
+    border:none;
+}
+
+.modal-body .form-group .col-sm-9{
+    margin-bottom: 15px;
+}
+  .display-block {
+    display: block;
+  }
+  
+  .display-none {
+    display: none;
+  }
+
+div.characteristics span.road-width {
+    background: url('https://alonhadat.com.vn/publish/img/utility-icon.png') 0 -766px no-repeat;
+    text-indent: 27px;
+    display: inline-block;
+    width: 123px;
+}
+div.characteristics span.floors {
+    background: url('https://alonhadat.com.vn/publish/img/utility-icon.png') 0 -789px no-repeat;
+    text-indent: 27px;
+    display: inline-block;
+    width: 123px;
+}
+div.characteristics span.bedroom {
+    background: url('https://alonhadat.com.vn/publish/img/utility-icon.png') 0 -810px no-repeat;
+    text-indent: 27px;
+    display: inline-block;
+    width: 143px;
+}
+div.characteristics span.parking {
+    background: url('https://alonhadat.com.vn/publish/img/utility-icon.png') 0 -835px no-repeat;
+    text-indent: 27px;
+    display: inline-block;
+    
+}
+
+div.data-info{
+    border: 1px solid white;
+    background-color:white;
+    margin: auto;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    width: 65%;
+    padding: 15px;
+}
+
+div#root{
+    color: #797979;
+    font-family:"Times New Roman", Times, serif !important;
+}
+
+p.data-title{
+    cursor: pointer;
+    font-weight: 700;
+    font-size:20px;
+    margin-bottom: 5px;
+}
+
+div.data-item2{
+    display: flex;
+    border-bottom: 2px solid;
+    padding-bottom: 10px;
+}
+
+div.data-item2 img{
+    width: 140px;
+    height: 140px;
+}
+
+div.field-data{
+    margin-left: 5px;
+}
+.btn-close-2{
+    margin-left: 7px;
+}
+.iconAddFav{
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 7%;
+    cursor: pointer;
+}
+.iconRemoveFav{
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 1%;
+    cursor: pointer;
+}
+.data-react{
+    position: relative;
+    padding:15px;
+    padding-left: 25%;
+    border-bottom: 2px solid;
+}
+
+.data-react i{
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.corlorRed{
+    color: red;
+}
+div.data-comment{
+    padding-top: 15px;
+}
+div.data-comment input{
+    padding-left: 2%;
+    width: 100%;
+    padding-right: 2%;
+    border-radius: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+div.data-comment-2{
+    display: flex;
+    font-size: 18px;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-bottom: 10px;
+}
+p.user-comment{
+    color: blue;
+    font-weight: 600;
+    margin-right: 20px;
+}
+
+img.image-user{
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+}
+
+.hide{
+    display: none;
+}
+
+div.price-dis div.ct_dis a{
+    color: #797979;
+    pointer-events: none;
+}
+
+.add-new{
+    font-size:16px;
+}
+
+.add-new-one-modal{
+    overflow: scroll !important;
+    height: 90% !important;
+    width: 80% !important;
+}
+.info-modal{
+    overflow: scroll !important;
+    height: 90% !important;
+}
+.add-new-footer{
+    float:right;
+    padding-bottom: 20px;
+}
+.col-sm-2{
+    margin-bottom: 15px;
+}
+.modal-header{
+    text-align: center;
+    font-size: 30px;
+}
+#btnDel, #btnUpdateAsk{
+    display: none;
+}
+ul.dropdown-menu a:hover{
+    background-color: #40a9ff;
+    cursor: pointer;
+}
+
+.SelectLI{
+    display: inline-flex;
+    background:white;
+    color:#797979;
+    padding: 10px;
+    margin-right: 5px;
+    font-size: 14px;
+    font-weight: 800;
+    border-radius: 5px 5px 0 0;
+}
+
+.SelectLI:hover{
+    cursor: pointer;
+    background-color: #797979 !important;
+    color: #fff !important;
+}
+.divSearch{
+    display: inline-flex;
+    border: 5px solid black;
+    background-color: black;
+}
+
+#inputBrowser{
+    width: 80.2%;
+    padding: 6px;
+    outline:none;
+}
+
+.selectSearch{
+    padding: 8px;
+    font-weight: 800;
+    margin-right: -2px;
+    outline:none;
+}
+
+.divButtonSearch{
+    width: 500px;
+}
+
+.buttonSearch{
+    margin-left: -2px;
+    border-radius:0px;
+    background:#3c9f10;
+    padding:8px 20px;
+}
+
+.ulSearch{
+    margin-bottom: 0px;
+    margin-left: 0px;
+    padding:0px;
+}
+.Search{
+    padding-top: 3%;
+    margin: auto;
+    width: 60%;
+}
+
+.dropdown-content-menu{
+    display: none;
+    position: absolute;
+    right: 2%;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content-menu a{
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content-menu a:hover{
+    background-color: #ddd;
+}
+
+#imgUser img:last-child{
+    display: none;
+}
+#imgUser:hover img:first-child{
+    display: none;
+}
+#imgUser:hover img:last-child{
+    display: inline-block;
+}
+#imgUser{
+    border-bottom: 1px solid #000;
+    color: #31708E;
+    font-weight: 800;
+    font-size: 24px;
+}
+.selectOptionSearch{
+    display: none;
+    width: 39%;
+    padding:1%;
+    margin-top:1%;
+    margin-right: 1%;
+}
+.selectOptionSearch:focus{
+    display: inline-block !important;
+}
+.fa-thumbs-o-up{
+    padding-right:15%;
+}
+.fa-comment-o{
+    padding-left:15%;
+}
+/* RESPONSIVE */
+/* 
+///////////////////////////////////////
+*/
+@media screen and (max-width: 900px) {
+    .dropdown-content {
+        margin-top: 3%;
+    }
+    .data-react{
+        padding-left:10%;
+    }
+    .fa-comment-o{
+        padding-left:0%;
+    }
+    #inputBrowser{
+        width:29vw;
+    }
+    .divButtonSearch{
+        width: max-content;
+    }
+    .data-react i {
+        font-size: 20px;
+    }
+    .iconAddFav{
+        right:10%;
+    }
+  }
+@media screen and (max-width: 600px) {
+    .data-user{
+        font-size: 13px;
+    }
+    .modal-header{
+        font-size: 25px;
+    }
+    .dropdown-content {
+        margin-top: 6%;
+        right: 10%;
+    }
+    .add-new-one-modal{
+        width: 100% !important;
+    }
+    .info-modal{
+        width: 100% !important;
+    }
+    .SelectLI {
+        font-size: 12px;
+    }
+    .Search{
+        width: auto;
+    }
+    .divSearch{
+        font-size:11px;
+    }
+    #inputBrowser{
+        width: auto;
+        line-height: 1.6em;
+        padding: 0.5em;
+    }
+    .buttonSearch{
+        padding: 0.7em;
+        font-size: 11px;
+    }
+    div.data-info{
+        width:auto;
+    }
+    p.data-title{
+        font-size:13px;
+    }
+    .field-data{
+        font-size:13px;
+    }
+    .IconShow{
+        right:10%;
+    }
+    .data-react{
+        padding:10px;
+        padding-left:5%;
+    }
+    .iconAddFav{
+        right:10%;
+        width: 16px;
+        height: 16px;
+    }
+    .iconRemoveFav{
+        width: 16px;
+        height: 16px;
+    }
+    .data-react i{
+        font-size:16px;
+    }
+    .fa-comment-o{
+        padding-left:0%;
+    }
+    .selectSearch{
+        width: 7em;
+    }
+    #dropDownLinhVuc{
+        width: 70vw;
+    }
+    .fa-thumbs-o-up{
+        padding-right: 7vw;
+    }
+  }
+
+  @media screen and (max-width: 350px) {
+    .field-data{
+        width: 40vw;
+    }
+  }

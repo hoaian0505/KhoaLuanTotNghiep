@@ -1,0 +1,8 @@
+version: "3"
+services:
+  app:
+    build: .
+    ports:
+      - "5555:5555"
+    environment:
+      - MONGO_URL=mongodb+srv://tomasnguyen0505:An551998@companydata-cb920.mongodb.net/test?retryWrites=true&w=majority
